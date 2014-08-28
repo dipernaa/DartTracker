@@ -1,0 +1,22 @@
+﻿<h2>Cricket @Html.ActionLink("Restart", "Index", "Cricket", null, new { @class = "btn btn-default" })</h2>
+
+<table class="table table-bordered gameTable">
+    <tbody>
+        <!-- ko foreach: lines -->
+        <tr>
+            <td data-bind="click: $root.firstHit"><img class="hitsImage" data-bind="attr: { src: firstImageSrc }"/></td>
+            <td data-bind="text: points"></td>
+            <td data-bind="click: $root.secondHit"><img class="hitsImage" data-bind="attr: { src: secondImageSrc }" /></td>
+        </tr>
+        <!-- /ko -->
+        <tr>
+            <td data-bind="text: firstPlayerScore"></td>
+            <td>SCORE</td>
+            <td data-bind="text: secondPlayerScore"></td>
+        </tr>
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/cricket")
+}

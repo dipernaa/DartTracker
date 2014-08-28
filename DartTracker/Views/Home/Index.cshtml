@@ -1,0 +1,20 @@
+﻿<div class="jumbotron">
+    <h1>Dart Tracker</h1>
+    <p>Score a game of darts and track leaderboards(coming soon!) with your friends.</p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>301</h2>
+        <p>Start with 301 points and try to get to zero but not below it.</p>
+        @Html.ActionLink("Start Game", "Index", "OhOne", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-6">
+        <h2>Cricket</h2>
+        <p>I don't know.</p>
+        @Html.ActionLink("Start Game", "Index", "Cricket", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/home")
+}
