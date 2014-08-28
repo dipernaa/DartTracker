@@ -162,8 +162,11 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Assets\blank.png" />
     <Content Include="Assets\dartlogo.png" />
+    <Content Include="Assets\one-white.png" />
     <Content Include="Assets\one.png" />
+    <Content Include="Assets\three-white.png" />
     <Content Include="Assets\three.png" />
+    <Content Include="Assets\two-white.png" />
     <Content Include="Assets\two.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -191,6 +194,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="Properties\PublishProfiles\darttracker.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\cricket.js" />
     <Content Include="Scripts\home.js" />

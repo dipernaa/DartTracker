@@ -1,0 +1,22 @@
+﻿<h2>OhOne</h2>
+
+<div class="btn-group">
+    <button data-bind="click: startGame" type="button" class="btn btn-default">Start Game</button>
+    @Html.ActionLink("Restart", "Index", "OhOne", null, new { @class = "btn btn-default" })
+</div>
+<select id="gameSelector" data-bind="options: gameModes, selectedOptions: selectedGameMode"></select>
+<br /><br />
+
+<table class="table table-bordered gameTable">
+    <tbody>
+        <tr>
+            <td data-bind="text: firstPlayerScore"></td>
+            <td>SCORE</td>
+            <td data-bind="text: secondPlayerScore"></td>
+        </tr>
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/ohOne")
+}
