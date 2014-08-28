@@ -16,6 +16,10 @@ textarea {
     max-width: 280px;
 }
 
+.hipster {
+    font-family: 'Lobster', cursive;
+}
+
 /*.mainJumbo {
     background-color: #497959;
     color: white;
