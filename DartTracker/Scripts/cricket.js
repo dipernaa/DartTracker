@@ -36,6 +36,14 @@
         self.firstPlayerName = ko.observable("");
         self.secondPlayerName = ko.observable("");
 
+        self.startGame = function () {
+            if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
+                $("#startGameButton").attr("disabled", true);
+                $("#firstPlayer").html(self.firstPlayerName());
+                $("#secondPlayer").html(self.secondPlayerName());
+            }
+        }
+
         self.firstPlayerScore = ko.pureComputed(function () {
             var total = 0;
             $.each(self.lines(), function () { total += this.firstPlayerScore() })

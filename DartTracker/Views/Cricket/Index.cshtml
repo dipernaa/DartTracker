@@ -1,11 +1,15 @@
-﻿<h2>Cricket @Html.ActionLink("Restart", "Index", "Cricket", null, new { @class = "btn btn-default" })</h2>
+﻿<h2>Cricket</h2>
+<div class="btn-group">
+    <button id="startGameButton" class="btn btn-default" data-bind="click: startGame">Start Game</button>
+    @Html.ActionLink("Restart", "Index", "Cricket", null, new { @class = "btn btn-default" })
+</div>
 
 <table class="table table-bordered gameTable">
     <tbody>
         <tr>
-            <td><input id="firstPlayer" type="text" data-bind="value: firstPlayerName" maxlength="4" placeholder="First Player Name" /></td>
+            <td id="firstPlayer"><input class="form-control" type="text" data-bind="value: firstPlayerName" maxlength="4" placeholder="First Player Name" /></td>
             <td></td>
-            <td><input id="secondPlayer" type="text" data-bind="value: secondPlayerName" maxlength="4" placeholder="Second Player Name" /></td>
+            <td id="secondPlayer"><input class="form-control" type="text" data-bind="value: secondPlayerName" maxlength="4" placeholder="Second Player Name" /></td>
         </tr>
         <!-- ko foreach: lines -->
         <tr>
