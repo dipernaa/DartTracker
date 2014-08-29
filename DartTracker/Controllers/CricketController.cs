@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DartTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,18 +29,12 @@ namespace DartTracker.Controllers
 
         // POST: Cricket/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public void Create(CricketModel model)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            AmazonHandler amazonHandler = new AmazonHandler();
+            model.DATE = DateTime.Now.ToString("s");
+            amazonHandler.addItem(model, "DartTrackerLeaderboard");
+            
         }
 
         // GET: Cricket/Edit/5

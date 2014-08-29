@@ -33,6 +33,9 @@
 
     var GameViewModel = function () {
         var self = this;
+        self.firstPlayerName = ko.observable("");
+        self.secondPlayerName = ko.observable("");
+
         self.firstPlayerScore = ko.pureComputed(function () {
             var total = 0;
             $.each(self.lines(), function () { total += this.firstPlayerScore() })
@@ -74,11 +77,17 @@
             if (firstPlayerDone && self.firstPlayerScore() > self.secondPlayerScore()) {
                 alert("First player wins with a score of " + self.firstPlayerScore() + ".");
                 cleanCells();
+                if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
+                    updateLeaderboard(self.firstPlayerName(), self.secondPlayerName(), self.firstPlayerScore() - self.secondPlayerScore());
+                }
             } else if (secondPlayerDone && self.secondPlayerScore() > self.firstPlayerScore()) {
                 alert("Second player wins with a score of " + self.secondPlayerScore() + ".");
                 cleanCells();
+                if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
+                    updateLeaderboard(self.secondPlayerName(), self.firstPlayerName(), self.secondPlayerScore() - self.firstPlayerScore());
+                }
             } else if (firstPlayerDone && secondPlayerDone) {
-                alert("Tie game with a score of " + self.firstPlayerScore() + ".");
+                alert("Tie game with a score of " + self.firstPlayerScore() + ".\nNo leaderboard entry.");
                 cleanCells();
             }
         }
@@ -108,4 +117,31 @@ function getImageSrc(hits) {
         default:
             return "/Assets/three-white.png";
     }
+}
+
+function checkNames(firstPlayerName, secondPlayerName) {
+    var isGood = false;
+    if (firstPlayerName.trim() !== "" && secondPlayerName.trim() !== "") {
+        isGood = true;
+    }
+    return isGood;
+}
+
+function updateLeaderboard(winner, loser, spread) {
+    var date = new Date()
+    var dataJSON = {
+        "ID": "Cricket", "DATE": "NULL", "WINNER": winner.toUpperCase(),
+        "LOSER": loser.toUpperCase(), "SPREAD": spread
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "../Cricket/Create",
+        contentType: "application/json",
+        data: JSON.stringify(dataJSON)
+    }).success(function () {
+        //alert("added");
+    }).error(function () {
+        alert("error saving score to leaderboard");
+    });
 }

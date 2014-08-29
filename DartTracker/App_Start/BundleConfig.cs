@@ -9,6 +9,8 @@ namespace DartTracker
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/DataTables-1.10.0/jquery.dataTables.js",
+                        "~/Scripts/DataTables-1.10.0/dataTables.bootstrap.js",
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
@@ -23,6 +25,9 @@ namespace DartTracker
             bundles.Add(new ScriptBundle("~/bundles/cricket").Include(
                         "~/Scripts/cricket.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/leaderboard").Include(
+                        "~/Scripts/leaderboard.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -34,6 +39,8 @@ namespace DartTracker
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/DataTables-1.10.0/css/dataTables.bootstrap.css",
+                      "~/Content/DataTables-1.10.0/css/jquery.dataTables.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

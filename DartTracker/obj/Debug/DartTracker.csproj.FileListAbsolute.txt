@@ -62,3 +62,5 @@ C:\Projects\git\DartTracker\DartTracker\bin\Antlr3.Runtime.pdb
 C:\Projects\git\DartTracker\DartTracker\obj\Debug\DartTracker.csprojResolveAssemblyReference.cache
 C:\Projects\git\DartTracker\DartTracker\obj\Debug\DartTracker.dll
 C:\Projects\git\DartTracker\DartTracker\obj\Debug\DartTracker.pdb
+C:\Projects\git\DartTracker\DartTracker\bin\AWSSDK.dll
+C:\Projects\git\DartTracker\DartTracker\bin\AWSSDK.pdb
