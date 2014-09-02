@@ -1,4 +1,14 @@
-﻿$().ready(function () {
+﻿/**
+* Initializes the page and sets the knockout bindings to elements on the page
+*/
+$().ready(function () {
+    $("#errorMessage").hide();
+
+    /**
+    * Represents a line in the the cricket table. Each line contains a hits cell for 
+    * each player and a cell containing the value for the cricket number
+    * @param pointValue - point value of the cricket number
+    */
     var CricketLine = function (pointValue) {
         var self = this;
         self.firstPlayerHits = ko.observable("");
@@ -12,6 +22,9 @@
 
         self.points = ko.observable(pointValue);
 
+        /**
+        * Handles the hit for this specific line's cricket number for player one
+        */
         self.firstPlayerHit = function () {
             if (self.firstPlayerHits() !== "///") {
                 self.firstPlayerHits(self.firstPlayerHits() + "/");
@@ -21,6 +34,9 @@
             self.firstImageSrc(getImageSrc(self.firstPlayerHits()));
         };
 
+        /**
+        * Handles the hit for this specific line's cricket number for player two
+        */
         self.secondPlayerHit = function () {
             if (self.secondPlayerHits() !== "///") {
                 self.secondPlayerHits(self.secondPlayerHits() + "/");
@@ -31,16 +47,28 @@
         };
     };
 
+    /**
+    * Represents the cricket table and handles the actions performed on the page
+    */
     var GameViewModel = function () {
         var self = this;
         self.firstPlayerName = ko.observable("");
         self.secondPlayerName = ko.observable("");
 
+        var namesEntered = false;
+
+        /**
+        * Starts the cricket game if there are names entered
+        */
         self.startGame = function () {
             if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
                 $("#startGameButton").attr("disabled", true);
                 $("#firstPlayer").html(self.firstPlayerName());
                 $("#secondPlayer").html(self.secondPlayerName());
+                $("#errorMessage").hide();
+                namesEntered = true;
+            } else {
+                $("#errorMessage").show();
             }
         }
 
@@ -64,16 +92,35 @@
             self.lines.push(new CricketLine(cricketNumbers[i]));
         }
 
+        /**
+        * Registers a hit for the first player for this specific line
+        * @param line - cricket line that was clicked on
+        */
         self.firstHit = function (line) {
-            line.firstPlayerHit();
-            self.gameChecker();
+            if (namesEntered) {
+                line.firstPlayerHit();
+                self.gameChecker();
+            } else {
+                $("#errorMessage").show();
+            }
         }
 
+        /**
+        * Registers a hit for the second player for this specific line
+        * @param line - cricket line that was clicked on
+        */
         self.secondHit = function (line) {
-            line.secondPlayerHit();
-            self.gameChecker();
+            if (namesEntered) {
+                line.secondPlayerHit();
+                self.gameChecker();
+            } else {
+                $("#errorMessage").show();
+            }
         }
 
+        /**
+        * Checks the cricket game to see if it is finished
+        */
         self.gameChecker = function () {
             var firstPlayerDone = true;
             var secondPlayerDone = true;
@@ -104,6 +151,9 @@
     ko.applyBindings(new GameViewModel());
 });
 
+/**
+* Removes the knockout bindings from each cell in the cricket table
+*/
 function cleanCells() {
     var i;
     var cells = document.getElementsByClassName("hitsCell");
@@ -112,10 +162,18 @@ function cleanCells() {
     }
 }
 
+/**
+* Gets the point value from the cricket number
+* @param points - the point value from the cricket number
+*/
 function getPointValue(points) {
     return (points === "B" ? 25 : parseInt(points));
 }
 
+/**
+* Changes the image representing the number of hits based on the number of hits
+* @param hits - number of hits for this specific cricket number
+*/
 function getImageSrc(hits) {
     switch (hits) {
         case "/":
@@ -127,6 +185,11 @@ function getImageSrc(hits) {
     }
 }
 
+/**
+* Checks the entered names to make sure they aren't white space or entered
+* @param firstPlayerName - first player's name
+* @param secondPlayerName - second player's name
+*/
 function checkNames(firstPlayerName, secondPlayerName) {
     var isGood = false;
     if (firstPlayerName.trim() !== "" && secondPlayerName.trim() !== "") {
@@ -135,6 +198,12 @@ function checkNames(firstPlayerName, secondPlayerName) {
     return isGood;
 }
 
+/**
+* Updates the leaderboard database with the newly finished game
+* @param winner - winner of the cricket game
+* @param loser - loser of cricket game
+* @param spread - difference of winner's and loser's score
+*/
 function updateLeaderboard(winner, loser, spread) {
     var date = new Date()
     var dataJSON = {

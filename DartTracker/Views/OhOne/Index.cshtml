@@ -1,11 +1,30 @@
 ﻿<h2>OhOne</h2>
 
 <div class="btn-group">
-    <button data-bind="click: startGame" type="button" class="btn btn-default">Start Game</button>
+    <button id="startGameButton" class="btn btn-default" data-bind="click: startGame" type="button">Start Game</button>
     @Html.ActionLink("Restart", "Index", "OhOne", null, new { @class = "btn btn-default" })
 </div>
 <select id="gameSelector" data-bind="options: gameModes, selectedOptions: selectedGameMode"></select>
-<br /><br />
+
+<table class="table table-bordered gameTable">
+    <tbody>
+        <tr>
+            <td id="firstPlayer"><input class="form-control" type="text" data-bind="value: firstPlayerName" maxlength="4" placeholder="First Player Name" /></td>
+            <td colspan="2"><p id="playerTurn">Player One's Turn</p><p id="errorMessage">Enter names before playing</p></td>
+            <td id="secondPlayer"><input class="form-control" type="text" data-bind="value: secondPlayerName" maxlength="4" placeholder="Second Player Name" /></td>
+        </tr>
+        <!-- ko foreach: dartNumbers -->
+        <tr data-bind="foreach: numbers">
+            <td data-bind="text: $data"></td>
+        </tr>
+        <!-- /ko -->
+        <tr>
+            <td>double</td>
+            <td colspan="2">bull</td>
+            <td>triple</td>
+        </tr>
+    </tbody>
+</table>
 
 <table class="table table-bordered gameTable">
     <tbody>

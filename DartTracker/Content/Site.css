@@ -38,6 +38,10 @@ textarea {
     text-align: center;
 }
 
+.playerTurn {
+    text-align: center;
+}
+
 .hitsImage {
     height: 50px;
     width: 50px;

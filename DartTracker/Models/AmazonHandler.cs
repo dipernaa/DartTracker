@@ -11,8 +11,17 @@ using System.Web;
 
 namespace DartTracker.Models
 {
+
+    /// <summary>
+    /// Handles the communication between the website and Amazon Web Service's DynamoDB
+    /// </summary>
     public class AmazonHandler
     {
+
+        /// <summary>
+        /// Gets the DynamoDB client to communicate with Amazon Web Services
+        /// </summary>
+        /// <returns>DynamoDB client</returns>
         public AmazonDynamoDBClient getClient()
         {
             AmazonDynamoDBConfig config = new AmazonDynamoDBConfig();
@@ -22,6 +31,12 @@ namespace DartTracker.Models
                 "5f1NOSq1vWJ7jmbR9Grjm8udLFd55knXwVU486iK"), config);
         }
 
+        /// <summary>
+        /// Adds a item to the specified table in DynamoDB
+        /// </summary>
+        /// <typeparam name="T">General type</typeparam>
+        /// <param name="item">General item to be added to the specified table in DynamoDB</param>
+        /// <param name="tableName">Specific table in DynamoDB to add item to</param>
         public void addItem<T>(T item, string tableName)
         {
             var client = getClient();
@@ -40,6 +55,12 @@ namespace DartTracker.Models
             client.PutItem(request);
         }
 
+        /// <summary>
+        /// Querys a specific table in DynamoDB with the same id as that passed in
+        /// </summary>
+        /// <param name="tableName">Table to be queried in DyanmoDB</param>
+        /// <param name="id">ID that has to match</param>
+        /// <returns>Results of the query</returns>
         public QueryResponse queryTable(string tableName, string id)
         {
             var client = getClient();
@@ -65,6 +86,11 @@ namespace DartTracker.Models
             return client.Query(request); ;
         }
 
+        /// <summary>
+        /// Makes a JSON array from a list of dictionary objects
+        /// </summary>
+        /// <param name="list">List of dictionary objects</param>
+        /// <returns>JSON array that was composed from the list</returns>
         public JArray makeJArray(IList<Dictionary<string, AttributeValue>> list)
         {
             JObject temp;

@@ -5,6 +5,10 @@ using System.Web;
 
 namespace DartTracker.Models
 {
+
+    /// <summary>
+    /// Represents a Cricket game
+    /// </summary>
     public class CricketModel
     {
         public string ID { get; set; }
