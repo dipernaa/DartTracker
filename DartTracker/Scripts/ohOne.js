@@ -25,10 +25,6 @@
             self.dartNumbers.push(new DartBoardModel([i, i + 1, i + 2, i + 3]));
         }
 
-        //self.handleClick = function () {
-        //    $("td").css("background-color", "blue");
-        //}
-
         self.startGame = function () {
             if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
                 $("#gameSelector").attr("disabled", true);
