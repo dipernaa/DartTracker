@@ -132,15 +132,15 @@ $().ready(function () {
             if (firstPlayerDone && self.firstPlayerScore() > self.secondPlayerScore()) {
                 alert("First player wins with a score of " + self.firstPlayerScore() + ".");
                 cleanCells();
-                if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
-                    updateLeaderboard(self.firstPlayerName(), self.secondPlayerName(), self.firstPlayerScore() - self.secondPlayerScore());
-                }
+                //if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
+                //    updateLeaderboard(self.firstPlayerName(), self.secondPlayerName(), self.firstPlayerScore() - self.secondPlayerScore());
+                //}
             } else if (secondPlayerDone && self.secondPlayerScore() > self.firstPlayerScore()) {
                 alert("Second player wins with a score of " + self.secondPlayerScore() + ".");
                 cleanCells();
-                if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
-                    updateLeaderboard(self.secondPlayerName(), self.firstPlayerName(), self.secondPlayerScore() - self.firstPlayerScore());
-                }
+                //if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
+                //    updateLeaderboard(self.secondPlayerName(), self.firstPlayerName(), self.secondPlayerScore() - self.firstPlayerScore());
+                //}
             } else if (firstPlayerDone && secondPlayerDone) {
                 alert("Tie game with a score of " + self.firstPlayerScore() + ".\nNo leaderboard entry.");
                 cleanCells();
@@ -198,27 +198,27 @@ function checkNames(firstPlayerName, secondPlayerName) {
     return isGood;
 }
 
-/**
-* Updates the leaderboard database with the newly finished game
-* @param winner - winner of the cricket game
-* @param loser - loser of cricket game
-* @param spread - difference of winner's and loser's score
-*/
-function updateLeaderboard(winner, loser, spread) {
-    var date = new Date()
-    var dataJSON = {
-        "ID": "Cricket", "DATE": "NULL", "WINNER": winner.toUpperCase(),
-        "LOSER": loser.toUpperCase(), "SPREAD": spread
-    };
+///**
+//* Updates the leaderboard database with the newly finished game
+//* @param winner - winner of the cricket game
+//* @param loser - loser of cricket game
+//* @param spread - difference of winner's and loser's score
+//*/
+//function updateLeaderboard(winner, loser, spread) {
+//    var date = new Date()
+//    var dataJSON = {
+//        "ID": "Cricket", "DATE": "NULL", "WINNER": winner.toUpperCase(),
+//        "LOSER": loser.toUpperCase(), "SPREAD": spread
+//    };
 
-    $.ajax({
-        type: "POST",
-        url: "../Cricket/Create",
-        contentType: "application/json",
-        data: JSON.stringify(dataJSON)
-    }).success(function () {
-        //alert("added");
-    }).error(function () {
-        alert("error saving score to leaderboard");
-    });
-}
+//    $.ajax({
+//        type: "POST",
+//        url: "../Cricket/Create",
+//        contentType: "application/json",
+//        data: JSON.stringify(dataJSON)
+//    }).success(function () {
+//        //alert("added");
+//    }).error(function () {
+//        alert("error saving score to leaderboard");
+//    });
+//}

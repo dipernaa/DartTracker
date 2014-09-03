@@ -31,9 +31,7 @@ namespace DartTracker.Controllers
         [HttpPost]
         public void Create(CricketModel model)
         {
-            AmazonHandler amazonHandler = new AmazonHandler();
-            model.DATE = DateTime.Now.ToString("s");
-            amazonHandler.addItem(model, "DartTrackerLeaderboard");
+            
             
         }
 
