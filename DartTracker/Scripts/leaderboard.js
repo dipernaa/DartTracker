@@ -10,13 +10,6 @@
 
 function setDataTable() {
     $("#leaderboardTable").DataTable({
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "aoColumnDefs": [
-                {
-                    "bSortable": false,
-                    "aTargets": [0, 1]
-                }
-        ],
-        "order": [[2, "desc"]]
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
     });
 }

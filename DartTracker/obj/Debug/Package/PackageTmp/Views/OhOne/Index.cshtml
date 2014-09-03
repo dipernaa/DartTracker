@@ -1,7 +1,8 @@
-﻿<h2>OhOne</h2>
+﻿<h2>Oh One</h2>
 
 <div class="btn-group">
-    <button id="startGameButton" class="btn btn-default" data-bind="click: startGame" type="button">Start Game</button>
+    <a id="startGameButton" class="btn btn-default" data-bind="click: startGame">Start Game</a>
+    <a id="submitTurnButton" class="btn btn-default" data-bind="click: submitTurn">Submit Turn</a>
     @Html.ActionLink("Restart", "Index", "OhOne", null, new { @class = "btn btn-default" })
 </div>
 <select id="gameSelector" data-bind="options: gameModes, selectedOptions: selectedGameMode"></select>
@@ -15,13 +16,13 @@
         </tr>
         <!-- ko foreach: dartNumbers -->
         <tr data-bind="foreach: numbers">
-            <td data-bind="text: $data"></td>
+            <td class="hitsCell" data-bind="text: $data, click: $root.handleClick"></td>
         </tr>
         <!-- /ko -->
         <tr>
-            <td>double</td>
-            <td colspan="2">bull</td>
-            <td>triple</td>
+            <td class="hitsCell multiplyerCell" data-bind="click: doubleClick">double</td>
+            <td class="hitsCell" colspan="2" data-bind="click: handleClick">bull</td>
+            <td class="hitsCell multiplyerCell" data-bind="click: tripleClick">triple</td>
         </tr>
     </tbody>
 </table>
