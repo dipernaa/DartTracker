@@ -1,5 +1,4 @@
-﻿using DartTracker.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,7 +28,7 @@ namespace DartTracker.Controllers
 
         // POST: Cricket/Create
         [HttpPost]
-        public void Create(CricketModel model)
+        public void Create(int id)
         {
             
             

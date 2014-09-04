@@ -1,12 +1,22 @@
-﻿$().ready(function () {
+﻿/**
+* Initializes the page and sets the knockout bindings to elements on the page
+*/
+$().ready(function () {
     $("#errorMessage").hide();
     $("#playerTurn").hide();
 
+    /**
+    * Represents a line in the Oh One table containing a number on the dart board
+    * @param array - set of numbers to make line out of
+    */
     var DartBoardModel = function (array) {
         var self = this;
         self.numbers = ko.observableArray(array);
     }
 
+    /**
+    * Represents the Oh One table and handles the actions performed on the page
+    */
     var GameViewModel = function () {
         var count = 0;
         var total = 0;
@@ -32,6 +42,11 @@
             self.dartNumbers.push(new DartBoardModel([i, i + 1, i + 2, i + 3]));
         }
 
+        /**
+        * Handles each click that is done on the Oh One board
+        * @param item - not used
+        * @param event - the event that was triggered
+        */
         self.handleClick = function (item, event) {
             if (self.namesEntered()) {
                 if (count < 3) {
@@ -45,6 +60,11 @@
             }
         }
 
+        /**
+        * Handles each click that is to the double multiplyer
+        * @param item - not used
+        * @param event - the event that was triggered
+        */
         self.doubleClick = function (item, event) {
             if (self.namesEntered()) {
                 if (!activeMultiplyer) {
@@ -55,6 +75,11 @@
             }
         }
 
+        /**
+        * Handles each click that is to the triple multiplyer
+        * @param item - not used
+        * @param event - the event that was triggered
+        */
         self.tripleClick = function (item, event) {
             if (self.namesEntered()) {
                 if (!activeMultiplyer) {
@@ -65,6 +90,9 @@
             }
         }
 
+        /**
+        * Submits the player's turn and deducts the player's score based on the total points accumulated
+        */
         self.submitTurn = function () {
             if (self.namesEntered()) {
                 if (self.firstPlayerTurn()) {
@@ -95,6 +123,9 @@
             }
         }
 
+        /**
+        * Changes the game status message based on who's turn it is and whether or not someone has won
+        */
         self.gameStatus = ko.pureComputed(function () {
             var status = "";
             if (self.namesEntered()) {
@@ -109,6 +140,9 @@
             return status;
         });
 
+        /**
+        * Starts the Oh One game and sets the player's name
+        */
         self.startGame = function () {
             if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
                 $("#gameSelector").attr("disabled", true);
@@ -127,7 +161,7 @@
 })
 
 /**
-* Removes the knockout bindings from each cell in the cricket table
+* Removes the knockout bindings from each cell in the Oh One table
 */
 function cleanCells() {
     var i;
@@ -139,8 +173,8 @@ function cleanCells() {
 }
 
 /**
-* Gets the point value from the cricket number
-* @param points - the point value from the cricket number
+* Gets the point value from the Oh One number
+* @param points - the point value from the Oh One number
 */
 function getPointValue(points) {
     return (points === "bull" ? 25 : parseInt(points));
