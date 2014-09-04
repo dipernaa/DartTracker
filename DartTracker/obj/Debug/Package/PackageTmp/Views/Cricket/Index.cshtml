@@ -8,7 +8,7 @@
     <tbody>
         <tr>
             <td id="firstPlayer"><input class="form-control" type="text" data-bind="value: firstPlayerName" maxlength="4" placeholder="First Player Name" /></td>
-            <td><p id="errorMessage">Enter names before playing</p></td>
+            <td><p data-bind="ifnot: namesEntered">Enter names before playing</p></td>
             <td id="secondPlayer"><input class="form-control" type="text" data-bind="value: secondPlayerName" maxlength="4" placeholder="Second Player Name" /></td>
         </tr>
         <!-- ko foreach: lines -->

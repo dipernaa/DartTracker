@@ -11,16 +11,16 @@
         var count = 0;
         var total = 0;
         var multiplyer = 1;
-        var namesEntered = false;
         var activeMultiplyer = false;
-        var firstPlayerTurn = true;
 
         var self = this;
         self.firstPlayerName = ko.observable("");
         self.secondPlayerName = ko.observable("");
-
         self.firstPlayerScore = ko.observable(0);
         self.secondPlayerScore = ko.observable(0);
+
+        self.firstPlayerTurn = ko.observable(true);
+        self.namesEntered = ko.observable(false);
 
         self.gameModes = ko.observableArray([301, 501, 701]);
         self.selectedGameMode = ko.observableArray([301]);
@@ -33,7 +33,7 @@
         }
 
         self.handleClick = function (item, event) {
-            if (namesEntered) {
+            if (self.namesEntered()) {
                 if (count < 3) {
                     $(event.target).css("background-color", "#808080");
                     count = count + 1;
@@ -42,76 +42,72 @@
                     $(".multiplyerCell").css("background-color", "#497959");
                     activeMultiplyer = false;
                 }
-            } else {
-                $("#errorMessage").show();
             }
         }
 
         self.doubleClick = function (item, event) {
-            if (namesEntered) {
+            if (self.namesEntered()) {
                 if (!activeMultiplyer) {
                     $(event.target).css("background-color", "#bada55");
                     multiplyer = 2;
                     activeMultiplyer = true;
                 }
-            } else {
-                $("#errorMessage").show();
             }
         }
 
         self.tripleClick = function (item, event) {
-            if (namesEntered) {
+            if (self.namesEntered()) {
                 if (!activeMultiplyer) {
                     $(event.target).css("background-color", "#bada55");
                     multiplyer = 3;
                     activeMultiplyer = true;
                 }
-            } else {
-                $("#errorMessage").show();
             }
         }
 
         self.submitTurn = function () {
-            if (namesEntered) {
-                if (firstPlayerTurn) {
+            if (self.namesEntered()) {
+                if (self.firstPlayerTurn()) {
                     if (self.firstPlayerScore() - total >= 0) {
                         self.firstPlayerScore(self.firstPlayerScore() - total);
-                        if (self.firstPlayerScore() === 0) {
-                            alert("game over")
-                            cleanCells();
-                            $("#playerTurn").html("First Player Wins!");
-                        } else {
-                            $("#playerTurn").html("Second Player's Turn");
-                        }
                     } else {
                         alert("over");
-                        $("#playerTurn").html("Second Player's Turn");
                     }
                 } else {
                     if (self.secondPlayerScore() - total >= 0) {
                         self.secondPlayerScore(self.secondPlayerScore() - total);
-                        if (self.secondPlayerScore() === 0) {
-                            alert("game over")
-                            cleanCells();
-                            $("#playerTurn").html("Second Player Wins!");
-                        } else {
-                            $("#playerTurn").html("First Player's Turn");
-                        }
                     } else {
                         alert("over");
-                        $("#playerTurn").html("First Player's Turn");
                     }
                 }
+
+                if (self.firstPlayerScore() === 0 || self.secondPlayerScore() === 0) {
+                    alert("game over")
+                    cleanCells();
+                }
+
                 count = 0;
                 total = 0;
                 multiplyer = 1;
                 activeMultiplyer = false;
+                self.firstPlayerTurn(!self.firstPlayerTurn());
                 $("td").css("background-color", "#497959");
-                firstPlayerTurn = !firstPlayerTurn;
-            } else {
-                $("#errorMessage").show();
             }
         }
+
+        self.gameStatus = ko.pureComputed(function () {
+            var status = "";
+            if (self.namesEntered()) {
+                if (self.firstPlayerScore() === 0) {
+                    status = "First Player Wins!";
+                } else if (self.secondPlayerScore() === 0) {
+                    status = "Second Player Wins!";
+                } else {
+                    status = self.firstPlayerTurn() ? "First Player's Turn" : "Second Player's Turn";
+                }
+            }
+            return status;
+        });
 
         self.startGame = function () {
             if (checkNames(self.firstPlayerName(), self.secondPlayerName())) {
@@ -119,13 +115,10 @@
                 $("#startGameButton").attr("disabled", true);
                 $("#firstPlayer").html(self.firstPlayerName());
                 $("#secondPlayer").html(self.secondPlayerName());
-                self.firstPlayerScore(self.selectedGameMode())
-                self.secondPlayerScore(self.selectedGameMode())
-                $("#errorMessage").hide();
-                $("#playerTurn").show();
-                namesEntered = true;
-            } else {
-                $("#errorMessage").show();
+
+                self.firstPlayerScore(self.selectedGameMode());
+                self.secondPlayerScore(self.selectedGameMode());
+                self.namesEntered(true);
             }
         }
     }

@@ -55,7 +55,7 @@ $().ready(function () {
         self.firstPlayerName = ko.observable("");
         self.secondPlayerName = ko.observable("");
 
-        var namesEntered = false;
+        self.namesEntered = ko.observable(false);
 
         /**
         * Starts the cricket game if there are names entered
@@ -65,10 +65,7 @@ $().ready(function () {
                 $("#startGameButton").attr("disabled", true);
                 $("#firstPlayer").html(self.firstPlayerName());
                 $("#secondPlayer").html(self.secondPlayerName());
-                $("#errorMessage").hide();
-                namesEntered = true;
-            } else {
-                $("#errorMessage").show();
+                self.namesEntered(true);
             }
         }
 
@@ -97,11 +94,9 @@ $().ready(function () {
         * @param line - cricket line that was clicked on
         */
         self.firstHit = function (line) {
-            if (namesEntered) {
+            if (self.namesEntered()) {
                 line.firstPlayerHit();
                 self.gameChecker();
-            } else {
-                $("#errorMessage").show();
             }
         }
 
@@ -110,11 +105,9 @@ $().ready(function () {
         * @param line - cricket line that was clicked on
         */
         self.secondHit = function (line) {
-            if (namesEntered) {
+            if (self.namesEntered()) {
                 line.secondPlayerHit();
                 self.gameChecker();
-            } else {
-                $("#errorMessage").show();
             }
         }
 
