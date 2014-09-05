@@ -1,0 +1,25 @@
+﻿<h2 class="tic-tac-toe">Tic-Tac-Toe</h2>
+
+<table class="table table-bordered gameTable sampleTable">
+    <tbody>
+        <!-- ko foreach: ticTacToeNumbers -->
+        <tr data-bind="foreach: boxes">
+            <td data-bind="text: number, click: $root.handleClick"><img data-bind="attr: { src: imageSrc }" /></td>
+        </tr>
+        <!-- /ko -->
+    </tbody>
+</table>
+
+<table class="table table-bordered gameTable tic-tac-toe">
+    <tbody>
+        <!-- ko foreach: ticTacToeNumbers -->
+        <tr data-bind="foreach: boxes">
+            <td data-bind="text: number, click: $root.handleClick"><img data-bind="attr: { src: imageSrc }" /></td>
+        </tr>
+        <!-- /ko -->
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/ticTacToe")
+}

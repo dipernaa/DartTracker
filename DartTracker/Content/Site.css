@@ -19,10 +19,13 @@ textarea {
     font-family: 'Lobster', cursive;
 }
 
-/*.mainJumbo {
-    background-color: #497959;
-    color: white;
-}*/
+table.sampleTable {
+    width: 40%;
+}
+
+table.tic-tac-toe {
+    width: 40%;
+}
 
 .gameTable {
     background-color: #497959;
